@@ -2,7 +2,7 @@ import javax.swing.*;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
+
 public class TipCalculatorGUI extends JFrame implements ActionListener{
     private JPanel mainPanel;
     private JLabel billLabel;
@@ -22,7 +22,7 @@ public class TipCalculatorGUI extends JFrame implements ActionListener{
     private TipCalculator newTC;
 
     public TipCalculatorGUI() {
-        newTC = new TipCalculator(0.0, 15,1);
+        newTC = new TipCalculator(5212, 30,1);
         createUIComponents();
     }
 
@@ -33,27 +33,53 @@ public class TipCalculatorGUI extends JFrame implements ActionListener{
         setLocation(450, 100);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+
         billTextField.setText("" + newTC.getBill());
         tipPercentageTextField.setText("" + newTC.getTip());
         peopleTextField.setText("" + newTC.getNumberOfPeople());
         totalTipTextField.setText("$" + newTC.calculateTip());
         totalPriceTextField.setText("$" + newTC.totalBill());
 
+        tipMinusButton.addActionListener(this);
+        tipPlusButton.addActionListener(this);
+        peopleMinusButton.addActionListener(this);
+        peoplePlusButton.addActionListener(this);
+
     }
 
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if(source instanceof JButton) {
-            JButton button = (JButton) source;
-            String text = button.getText();
-            if(text.equals("-")) {
-                tipPercentageTextField.setText("100");
-            } else {
-                tipPercentageTextField.setText("101");
+        if(source == tipMinusButton) {
+            if(newTC.getTip() != 0 ) {
+                newTC.setTipPercentage(newTC.getTip() - 1);
+                tipPercentageTextField.setText("" + newTC.getTip());
             }
+        } else if(source == tipPlusButton) {
+            newTC.setTipPercentage(newTC.getTip() + 1);
+            tipPercentageTextField.setText("" + newTC.getTip());
+        } else if (source == peopleMinusButton) {
+            if(newTC.getNumberOfPeople() != 0) {
+                newTC.setNumberOfPeople(newTC.getNumberOfPeople() - 1);
+                peopleTextField.setText("" +  newTC.getNumberOfPeople());
+            }
+        } else {
+            newTC.setNumberOfPeople(newTC.getNumberOfPeople() + 1);
+            peopleTextField.setText("" +  newTC.getNumberOfPeople());
         }
 
+        if(newTC.getNumberOfPeople() > 1) {
+            totalTipLabel.setText("Tip per person");
+            totalPriceLabel.setText("Total per person");
+            totalTipTextField.setText("$" + newTC.tipPerPerson());
+            totalPriceTextField.setText("$" + newTC.totalPerPerson());
+        } else {
+            totalTipLabel.setText("Tip");
+            totalPriceLabel.setText("Total");
+            totalTipTextField.setText("$" + newTC.calculateTip());
+            totalPriceTextField.setText("$" + newTC.totalBill());
+        }
     }
+
 
 
 }
