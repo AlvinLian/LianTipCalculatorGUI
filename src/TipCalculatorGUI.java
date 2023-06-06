@@ -2,8 +2,10 @@ import javax.swing.*;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class TipCalculatorGUI extends JFrame implements ActionListener{
+public class TipCalculatorGUI extends JFrame implements ActionListener, KeyListener {
     private JPanel mainPanel;
     private JLabel billLabel;
     private JTextField billTextField;
@@ -22,7 +24,7 @@ public class TipCalculatorGUI extends JFrame implements ActionListener{
     private TipCalculator newTC;
 
     public TipCalculatorGUI() {
-        newTC = new TipCalculator(5212, 30,1);
+        newTC = new TipCalculator(0, 30,1);
         createUIComponents();
     }
 
@@ -44,10 +46,12 @@ public class TipCalculatorGUI extends JFrame implements ActionListener{
         tipPlusButton.addActionListener(this);
         peopleMinusButton.addActionListener(this);
         peoplePlusButton.addActionListener(this);
+        billTextField.addKeyListener(this);
 
     }
 
     public void actionPerformed(ActionEvent e) {
+        billTextField.setText(billTextField.getText());
         Object source = e.getSource();
         if(source == tipMinusButton) {
             if(newTC.getTip() != 0 ) {
@@ -78,6 +82,32 @@ public class TipCalculatorGUI extends JFrame implements ActionListener{
             totalTipTextField.setText("$" + newTC.calculateTip());
             totalPriceTextField.setText("$" + newTC.totalBill());
         }
+
+
+    }
+
+    public void keyPressed(KeyEvent e) {
+    }
+
+    public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+            newTC.setBill(Integer.parseInt(billTextField.getText()));
+            if(newTC.getNumberOfPeople() > 1) {
+                totalTipLabel.setText("Tip per person");
+                totalPriceLabel.setText("Total per person");
+                totalTipTextField.setText("$" + newTC.tipPerPerson());
+                totalPriceTextField.setText("$" + newTC.totalPerPerson());
+            } else {
+                totalTipLabel.setText("Tip");
+                totalPriceLabel.setText("Total");
+                totalTipTextField.setText("$" + newTC.calculateTip());
+                totalPriceTextField.setText("$" + newTC.totalBill());
+            }
+        }
+    }
+
+    public void keyTyped(KeyEvent e) {
+
     }
 
 

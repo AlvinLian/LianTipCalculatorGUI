@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="94eae70a-db8d-41ac-85be-a2b8df405670" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TipCalculatorGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/TipCalculatorGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TipCalculatorGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TipCalculatorGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,6 +63,14 @@
       <option name="presentableId" value="Default" />
       <updated>1684759248939</updated>
     </task>
+    <task id="LOCAL-00001" summary="h">
+      <created>1684813350555</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684813350555</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -76,5 +83,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="h" />
+    <option name="LAST_COMMIT_MESSAGE" value="h" />
   </component>
 </project>
